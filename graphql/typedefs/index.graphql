@@ -1,0 +1,14 @@
+
+# Custom Scalars
+scalar Date
+
+type Query {
+  # Task
+  getTasks: [Task]!
+}
+
+type Mutation {
+  # Task
+  triggerTasks(user: TaskCreateInput!): [Int]!
+  login(email: String!, password: String!): String
+}

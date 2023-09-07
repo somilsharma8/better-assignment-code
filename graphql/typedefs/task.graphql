@@ -1,0 +1,16 @@
+type Task implements Timestamps {
+  id: ID!
+  name: String!
+  input: [Int]!
+  output: [Int]!
+  active: Boolean
+
+  # Interface required
+  createdAt: Date!
+  updatedAt: Date!
+}
+
+# Inputs
+input TaskCreateInput {
+  taskID: Int!
+}
