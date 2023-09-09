@@ -1,14 +1,15 @@
 
 # Custom Scalars
 scalar Date
+scalar Upload
 
 type Query {
   # Task
-  getTasks: [Task]!
+  getUploads(task: TaskInput): [Task]!
 }
 
 type Mutation {
   # Task
-  triggerTasks(user: TaskCreateInput!): [Int]!
+  uploadFile(inputObj: Upload!): UploadResponse!
   login(email: String!, password: String!): String
 }

@@ -1,5 +1,6 @@
 import { ApolloServer } from 'apollo-server-express';
 import { env } from '../config/environment/index.js';
+import { default as Upload } from 'graphql-upload/Upload.mjs';
 
 import schema from './schema.js';
 

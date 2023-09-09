@@ -1,9 +1,7 @@
 type Task implements Timestamps {
   id: ID!
   name: String!
-  input: [Int]!
-  output: [Int]!
-  active: Boolean
+  fileData: [String]!
 
   # Interface required
   createdAt: Date!
@@ -11,6 +9,8 @@ type Task implements Timestamps {
 }
 
 # Inputs
-input TaskCreateInput {
-  taskID: Int!
+input TaskInput {
+  id: Int!
+  name: String!
+  fileData: String!
 }

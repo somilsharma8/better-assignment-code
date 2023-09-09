@@ -1,5 +1,6 @@
 // Entry Point of the API Server
 import cors from "cors";
+import { default as UploadExpress } from 'graphql-upload/graphqlUploadExpress.mjs';
 
 import { port } from './config/environment/index.js';
 import apolloServer from "./graphql/index.js";
@@ -25,6 +26,7 @@ const startServer = async () => {
         console.log('Connected to database');
 
         app.use(cors());
+        app.use(UploadExpress());
         await apolloServer.applyMiddleware({
             app,
         });

@@ -1,0 +1,5 @@
+type UploadResponse {
+  result: [Int!]!
+  status: Int!
+  message: String
+}

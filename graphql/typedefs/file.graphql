@@ -1,0 +1,9 @@
+type File implements Timestamps {
+  fileName: String!
+  mimeType: String!
+  encoding: String!
+
+  # Interface required
+  createdAt: Date!
+  updatedAt: Date!
+}

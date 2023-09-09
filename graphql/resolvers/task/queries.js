@@ -1,6 +1,6 @@
 const taskQueries = {
-  getTasks: async (_, args) => {
-    console.log('Fetching all task data');
+  getUploads: async (_, args) => {
+    console.log('Fetching all uploaded file data');
   },
 };
 
