@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
 // import recursiveTaskTrigger from '../../../controller/triggerController.js';
-import {testFun} from '../../../controller/triggerController.js';
+import {testFun, recursiveTaskTrigger} from '../../../controller/triggerController.js';
 
 const fileDumpPath = '../../../fileDump/';
 
@@ -38,8 +38,8 @@ const taskMutations = {
       // const payload = fileContent.split(/(\n\d+\)\n)/); //||(\d+[\n]\n)
       console.log('FILE DATA ::::::: ', payload);
 
-      const resp = await recursiveTaskTrigger(payload, result);
-      // const resp = await testFun(result);
+      // const resp = await recursiveTaskTrigger(payload).then((recursiveResult) => console.log('RESULT ACQUIRED ::::: ', recursiveResult));
+      const resp = await testFun('blabla');
       console.log('RESULT OF ALL INPUTS ::::::: ', resp);
 
       return {
