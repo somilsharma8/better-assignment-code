@@ -18,10 +18,16 @@ const taskMutations = {
       console.log('Task triggered :::::: ', inputObj);
       const { createReadStream, filename, mimetype, encoding } = await inputObj.file;
 
-      const stream = createReadStream();
+      // const stream = createReadStream();
       const pathName = path.join(__dirname, `${fileDumpPath}${filename}`);
-      const writeStream = await fs.createWriteStream(pathName);
-      await stream.pipe(writeStream);
+      const writeStream = fs.createWriteStream(pathName);
+      // await stream.pipe(writeStream);
+      await new Promise((resolve, reject) =>
+        createReadStream()
+          .pipe(writeStream)
+          .on('finish', resolve)
+          .on('error', reject)
+      );
 
       // Reading the input file
       const fileContent = await fs.readFileSync(pathName, 'utf-8');
@@ -36,16 +42,17 @@ const taskMutations = {
       // const payload = fileContent.split(/\d+\)\n/);
       // payload.shift(); // Complexity O(n)
       // const payload = fileContent.split(/(\n\d+\)\n)/); //||(\d+[\n]\n)
-      console.log('FILE DATA ::::::: ', payload);
+      // console.log('FILE DATA ::::::: ', payload);
 
       let resp;
       resp = recursiveTaskTrigger(payload);
       //.then((recursiveResult) => console.log('RESULT ACQUIRED ::::: ', recursiveResult));
       // const resp = await testFun('blabla');
-      console.log('RESULT OF ALL INPUTS ::::::: ', resp);
+      // console.log('RESULT OF ALL INPUTS ::::::: ', resp);
+      await fs.writeFileSync(`${pathName}-output`, resp, 'utf-8');
 
       return {
-        result: [1, 1],
+        result: `File downloaded to ${path.join(__dirname, `${fileDumpPath}`)}`,
         message: 'Output generated successfully!!!',
         status: 200,
       };
