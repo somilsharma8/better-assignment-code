@@ -1,5 +1,4 @@
 export const recursiveTaskTrigger = (payload, result='') => {
-    // const p = await new Promise((resolve, reject) => {
         try {
             const payloadArr = payload[0].split(/\n/);
             const noOfTasks = parseInt(payloadArr[1]);
