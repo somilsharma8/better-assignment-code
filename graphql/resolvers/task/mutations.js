@@ -38,8 +38,10 @@ const taskMutations = {
       // const payload = fileContent.split(/(\n\d+\)\n)/); //||(\d+[\n]\n)
       console.log('FILE DATA ::::::: ', payload);
 
-      // const resp = await recursiveTaskTrigger(payload).then((recursiveResult) => console.log('RESULT ACQUIRED ::::: ', recursiveResult));
-      const resp = await testFun('blabla');
+      let resp;
+      resp = recursiveTaskTrigger(payload);
+      //.then((recursiveResult) => console.log('RESULT ACQUIRED ::::: ', recursiveResult));
+      // const resp = await testFun('blabla');
       console.log('RESULT OF ALL INPUTS ::::::: ', resp);
 
       return {

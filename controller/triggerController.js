@@ -1,4 +1,4 @@
-export const recursiveTaskTrigger = async (payload, result='') => {
+export const recursiveTaskTrigger = (payload, result='') => {
     // const p = await new Promise((resolve, reject) => {
         try {
             const payloadArr = payload[0].split(/\n/);
@@ -14,7 +14,7 @@ export const recursiveTaskTrigger = async (payload, result='') => {
             // Creating hashmap of all task input vs {taskNo + output array}
             // i represents each task row
             for (let i = 2; i < noOfTasks + 2; i++) {
-                console.log('ITERATION NUMBER ::::: ', i);
+                // console.log('ITERATION NUMBER ::::: ', i);
                 let taskValuesArr = payloadArr[i].split(';');
 
                 // Iterating over input part of the task
@@ -31,7 +31,7 @@ export const recursiveTaskTrigger = async (payload, result='') => {
             // Now search each input value in the hash map
             while(k < initialInputRowStr.length) {
                 if(hashMap[initialInputRowStr[k]]) {
-                    tasksTriggered += `${hashMap[initialInputRowStr[k]].task},`;
+                    // tasksTriggered += `${hashMap[initialInputRowStr[k]].task},`;
                     tasksTriggeredObj[hashMap[initialInputRowStr[k]].task] = true;
                     // Adding output of the value in respective task row to the initial list of inputs provided
                     initialInputRowStr += ',' + hashMap[initialInputRowStr[k]].byProduct;
@@ -40,15 +40,15 @@ export const recursiveTaskTrigger = async (payload, result='') => {
                 k++;
             }
     
-            console.log('Tasks triggered now :::: ', tasksTriggered, tasksTriggeredObj);
             tasksTriggered = Object.keys(tasksTriggeredObj).join(',')
             result += `${payloadArr[0]} ${tasksTriggered}\n\n`;
+            console.log('Tasks triggered now :::: ', result);
     
             payload.shift();
             if (payload.length === 0)
                 return result;
             else
-                recursiveTaskTrigger(payload, result);
+                return recursiveTaskTrigger(payload, result);
         } catch (error) {
             console.log('Error during recursion :::::: ', error);
         }
@@ -63,13 +63,5 @@ export const recursiveTaskTrigger = async (payload, result='') => {
 // }
 
 export const testFun = async (result) => {
-    await setTimeout(() => {
-        result = 'Somil';
-    }, 5000);
-    return result;
+         return result = 'Somil';
 }
-
-// module.exports = {
-//     recursiveTaskTrigger,
-//     testFun,
-// }
