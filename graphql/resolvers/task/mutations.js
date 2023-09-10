@@ -4,8 +4,7 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-// import recursiveTaskTrigger from '../../../controller/triggerController.js';
-import {testFun, recursiveTaskTrigger} from '../../../controller/triggerController.js';
+import { recursiveTaskTrigger} from '../../../controller/triggerController.js';
 
 const fileDumpPath = '../../../fileDump/';
 
@@ -15,7 +14,7 @@ const __dirname = dirname(__filename);
 const taskMutations = {
   uploadFile: async (_, { inputObj }) => {
     try {
-      console.log('Task triggered :::::: ', inputObj);
+      console.log('UploadFile has been triggered!!!!!');
       const { createReadStream, filename, mimetype, encoding } = await inputObj.file;
 
       // const stream = createReadStream();
@@ -39,16 +38,8 @@ const taskMutations = {
         };
 
       const payload = fileContent.split(/\n\n/);
-      // const payload = fileContent.split(/\d+\)\n/);
-      // payload.shift(); // Complexity O(n)
-      // const payload = fileContent.split(/(\n\d+\)\n)/); //||(\d+[\n]\n)
-      // console.log('FILE DATA ::::::: ', payload);
+      const resp = recursiveTaskTrigger(payload);
 
-      let resp;
-      resp = recursiveTaskTrigger(payload);
-      //.then((recursiveResult) => console.log('RESULT ACQUIRED ::::: ', recursiveResult));
-      // const resp = await testFun('blabla');
-      // console.log('RESULT OF ALL INPUTS ::::::: ', resp);
       await fs.writeFileSync(`${pathName}-output`, resp, 'utf-8');
 
       return {
@@ -59,21 +50,6 @@ const taskMutations = {
     } catch (error) {
       console.log('Error while processing file ::::: ', error);
     }
-  },
-  login: async (_, { email, password }) => {
-    // Add find query to fetch user details from db
-    // const user = await db.find({email: email, password: password});
-    const { id, permissions, roles } = {
-      id: 1,
-      active: true,
-      firstName: "Somil",
-      lastName: "Sharma",
-      role: "admin",
-      mobile: '999999999',
-      email: 'somilsharma8@gmail.com',
-      permissions: [],
-      roles: [],
-    };
   },
 };
 
